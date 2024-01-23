@@ -3,15 +3,27 @@ package main;
 import java.util.Random;
 import java.util.Scanner;
 
+/*
+ * Esta es la clase engine de mi programa en la cual se almacena toda la información
+ * necesaria para que se ejecute 
+ */
 public class engine {
 
+	/*
+	 * Este es el array de colores del programa
+	 */
 	enum tColores {
 		Rojo, Verde, Azul, Naranja
-		}
+	}
 
 	static int MAX_COLORES_SEC = 12;
 	static tColores[] secuenciaColores = new tColores[MAX_COLORES_SEC];
 
+	/**
+	 * Este metodo se encarga de relacionar los colores del array con una letra
+	 * @param _color
+	 * @return
+	 */
 	public tColores charToColor(char _color) {
 		tColores seleccion = null;
 		char Iniciales = Character.toLowerCase(_color);
@@ -34,6 +46,12 @@ public class engine {
 		return seleccion;
 	}
 
+	/**
+	 * Este metodo se encarga de asignarle un numero a cada color para generarlos
+	 * aleatoriamente en otro metodo
+	 * @param _numero
+	 * @return
+	 */
 	private tColores intToColor(int _numero) {
 		tColores posicion = null;
 		switch (_numero) {
@@ -53,6 +71,10 @@ public class engine {
 		return posicion;
 	}
 
+	/**
+	 * Este metodo se encarga de generar una secuencia aleatoria de colores del array
+	 * @param _NumColores
+	 */
 	public void generarSecuencia(int _NumColores) {
 		int maximiliano = MAX_COLORES_SEC - 1;
 		for (int i = 0; i < secuenciaColores.length; i++) {
@@ -62,20 +84,37 @@ public class engine {
 		}
 	}
 
+	/**
+	 * Este metodo se encarga de comprobar si la secuencia de colores generada
+	 * aleatoriamente y la dicha por el jugador es la misma
+	 * @param _index
+	 * @param _color
+	 * @return
+	 */
 	public boolean comprobarColor(int _index, tColores _color) {
 		return secuenciaColores[_index] == _color;
 	}
 
+	/**
+	 * Este metodo muestra el una parte del array generado
+	 * @param _numero
+	 */
 	public void mostrarSecuencia(int _numero) {
 		for (int i = 0; i < _numero; i++) {
 			System.out.print(secuenciaColores[i] + " ");
 		}
 	}
 
+	/**
+	 * Este metodo se encarga de finalizar el programa
+	 */
 	public void end() {
 		System.exit(0);
 	}
-	
+
+	/**
+	 * Este metodo se encarga de generar el menu del juego
+	 */
 	public void menu() {
 		System.out.println("Ingrese el número para realizar una de las siguientes opciones:");
 		System.out.println();
@@ -83,7 +122,8 @@ public class engine {
 		System.out.println();
 		System.out.println("2: Empezar a jugar");
 		Scanner sc1 = new Scanner(System.in);
-		int menu = sc1.nextInt();;
+		int menu = sc1.nextInt();
+		;
 
 		switch (menu) {
 		case 1:
@@ -94,26 +134,32 @@ public class engine {
 			play();
 			break;
 		}
-		if(menu != 1 || menu != 2) {
+		if (menu != 1 || menu != 2) {
 			System.out.println("Opción no válida");
 			System.out.println();
 			menu();
 		}
 	}
 
+	/**
+	 * Este metodo es el que se ejecuta primero al iniciar el juego
+	 */
 	public void start() {
-		Scanner sc1 = new Scanner(System.in);
+		Scanner nombre = new Scanner(System.in);
 
 		System.out.println("Welcome to Simon dice!");
 
 		System.out.println("Introduzca su nombre");
-		String nombre = sc1.next();
+		jugador name = new jugador(nombre.nextLine()); 
 
-		System.out.println("Hello " + nombre + ", good luck :)");
+		System.out.println(name.getNombre());
 		System.out.println();
 		menu();
 	}
 
+	/**
+	 * Este metodo se encarga de ejecutar el juego correctamente
+	 */
 	public void play() {
 
 		generarSecuencia(12);
@@ -144,24 +190,26 @@ public class engine {
 
 				System.out.println("¿Cuál era la secuencia de colores de la secuencia " + quesecuencia + "?");
 
+				//Esta parte del codigo se encarga de decidir que hacer dependiendo de 
+				//si se ha acertado el resultado, se ha fallado o se ha terminado el
+				//juego
 				for (int n = 0; n < 3 + i; n++) {
 					char secuenciaUsuario = new Scanner(System.in).next().charAt(0);
 					tColores colorElejido = charToColor(secuenciaUsuario);
 
 					if (comprobarColor(n, colorElejido)) {
 						System.out.println("Acertaste");
-					} 
-					else {
+					} else {
 						System.out.println("Fallaste, fin del juego");
 						menu();
 					}
 				}
-				
-				while(i == MAX_COLORES_SEC -3) {
+
+				while (i == MAX_COLORES_SEC - 3) {
 					System.out.println("Terminaste el juego");
 					menu();
 				}
-				
+
 			}
 		}
 	}
