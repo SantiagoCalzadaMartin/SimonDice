@@ -76,7 +76,6 @@ public class engine {
 	 * @param _NumColores
 	 */
 	public void generarSecuencia(int _NumColores) {
-		int maximiliano = MAX_COLORES_SEC - 1;
 		for (int i = 0; i < secuenciaColores.length; i++) {
 			Random aleatorio = new Random();
 			int random = aleatorio.nextInt(0, 4);
