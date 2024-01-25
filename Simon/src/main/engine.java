@@ -13,7 +13,7 @@ public class engine {
 	 * Este es el array de colores del programa
 	 */
 	enum tColores {
-		Rojo, Verde, Azul, Naranja
+		Rojo, Verde, Azul, Dorado
 	}
 
 	static int MAX_COLORES_SEC = 12;
@@ -37,8 +37,8 @@ public class engine {
 		case 'a':
 			seleccion = tColores.Azul;
 			break;
-		case 'n':
-			seleccion = tColores.Naranja;
+		case 'd':
+			seleccion = tColores.Dorado;
 			break;
 		default:
 			System.out.println("Color no reconocido");
@@ -65,7 +65,7 @@ public class engine {
 			posicion = tColores.Azul;
 			break;
 		case 3:
-			posicion = tColores.Naranja;
+			posicion = tColores.Dorado;
 			break;
 		}
 		return posicion;
