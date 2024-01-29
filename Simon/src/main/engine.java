@@ -21,6 +21,7 @@ public class engine {
 
 	/**
 	 * Este metodo se encarga de relacionar los colores del array con una letra
+	 * 
 	 * @param _color
 	 * @return
 	 */
@@ -49,6 +50,7 @@ public class engine {
 	/**
 	 * Este metodo se encarga de asignarle un numero a cada color para generarlos
 	 * aleatoriamente en otro metodo
+	 * 
 	 * @param _numero
 	 * @return
 	 */
@@ -72,13 +74,15 @@ public class engine {
 	}
 
 	/**
-	 * Este metodo se encarga de generar una secuencia aleatoria de colores del array
+	 * Este metodo se encarga de generar una secuencia aleatoria de colores del
+	 * array
+	 * 
 	 * @param _NumColores
 	 */
 	public void generarSecuencia(int _NumColores) {
 		for (int i = 0; i < secuenciaColores.length; i++) {
 			Random aleatorio = new Random();
-			int random = aleatorio.nextInt(0, 4);
+			int random = aleatorio.nextInt(4);
 			secuenciaColores[i] = intToColor(random);
 		}
 	}
@@ -86,6 +90,7 @@ public class engine {
 	/**
 	 * Este metodo se encarga de comprobar si la secuencia de colores generada
 	 * aleatoriamente y la dicha por el jugador es la misma
+	 * 
 	 * @param _index
 	 * @param _color
 	 * @return
@@ -96,11 +101,12 @@ public class engine {
 
 	/**
 	 * Este metodo muestra el una parte del array generado
+	 * 
 	 * @param _numero
 	 */
 	public void mostrarSecuencia(int _numero) {
 		for (int i = 0; i < _numero; i++) {
-			System.out.print(secuenciaColores[i] + " ");
+			System.out.println(secuenciaColores[i] + " ");
 		}
 	}
 
@@ -149,7 +155,7 @@ public class engine {
 		System.out.println("Welcome to Simon dice!");
 
 		System.out.println("Introduzca su nombre");
-		jugador name = new jugador(nombre.nextLine()); 
+		jugador name = new jugador(nombre.nextLine());
 
 		System.out.println(name.getNombre());
 		System.out.println();
@@ -161,7 +167,7 @@ public class engine {
 	 */
 	public void play() {
 
-		generarSecuencia(12);
+		generarSecuencia(MAX_COLORES_SEC);
 
 		for (int i = 0; i < MAX_COLORES_SEC; i++) {
 
@@ -189,9 +195,9 @@ public class engine {
 
 				System.out.println("¿Cuál era la secuencia de colores de la secuencia " + quesecuencia + "?");
 
-				//Esta parte del codigo se encarga de decidir que hacer dependiendo de 
-				//si se ha acertado el resultado, se ha fallado o se ha terminado el
-				//juego
+				// Esta parte del codigo se encarga de decidir que hacer dependiendo de
+				// si se ha acertado el resultado, se ha fallado o se ha terminado el
+				// juego
 				for (int n = 0; n < 3 + i; n++) {
 					char secuenciaUsuario = new Scanner(System.in).next().charAt(0);
 					tColores colorElejido = charToColor(secuenciaUsuario);
